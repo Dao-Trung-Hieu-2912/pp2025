@@ -1,60 +1,55 @@
-# ---------------------------------------------------------
-# 2.student.mark.oop.py
-# Student Mark Management System (OOP version)
-# ---------------------------------------------------------
+
 
 class Person:
     def __init__(self, sid, name, dob):
-        self._id = sid
-        self._name = name
-        self._dob = dob
+        self.__id = sid
+        self.__name = name
+        self.__dob = dob
 
     def get_id(self):
-        return self._id
+        return self.__id
 
     def get_name(self):
-        return self._name
+        return self.__name
 
     def info(self):
-        return f"ID: {self._id} | Name: {self._name} | DoB: {self._dob}"
+        return f"ID: {self.__id} | Name: {self.__name} | DoB: {self.__dob}"
 
 
 class Student(Person):
-    # inherits Person
-    pass
+    def __init__(self, sid, name, dob):
+        super().__init__(sid, name, dob)
 
 
 class Course:
     def __init__(self, cid, name):
-        self._cid = cid
-        self._name = name
+        self.__cid = cid
+        self.__name = name
 
     def get_id(self):
-        return self._cid
+        return self.__cid
 
     def get_name(self):
-        return self._name
+        return self.__name
 
     def info(self):
-        return f"ID: {self._cid} | Name: {self._name}"
+        return f"ID: {self.__cid} | Name: {self.__name}"
 
 
 class Mark:
     def __init__(self, student, course, value):
-        self._student = student
-        self._course = course
-        self._value = value
+        self.__student = student
+        self.__course = course
+        self.__value = value
 
     def get_course_id(self):
-        return self._course.get_id()
+        return self.__course.get_id()
 
     def show(self):
-        return f"{self._student.get_id()} - {self._student.get_name()}: {self._value}"
+        return f"{self.__student.get_id()} - {self.__student.get_name()}: {self.__value}"
 
 
-# ---------------------------------------------------------
-# Manager class to handle all operations
-# ---------------------------------------------------------
+
 
 class StudentMarkManager:
     def __init__(self):
@@ -62,7 +57,7 @@ class StudentMarkManager:
         self.courses = []
         self.marks = []
 
-    # ------------ Input methods (polymorphic: all use .input()) ------------
+    
 
     def input_students(self):
         n = int(input("Enter number of students: "))
@@ -86,7 +81,7 @@ class StudentMarkManager:
 
         cid = input("\nEnter course ID to input marks: ")
 
-        # find course object
+        
         course = None
         for c in self.courses:
             if c.get_id() == cid:
@@ -103,7 +98,7 @@ class StudentMarkManager:
             value = float(input("  Mark: "))
             self.marks.append(Mark(s, course, value))
 
-    # ------------ Listing methods (also polymorphic: all use .list()) ------------
+    
 
     def list_students(self):
         print("\n--- Student List ---")
@@ -124,9 +119,7 @@ class StudentMarkManager:
                 print(m.show())
 
 
-# ---------------------------------------------------------
-# Program Execution (same steps, no while-true)
-# ---------------------------------------------------------
+
 
 def main():
     manager = StudentMarkManager()
